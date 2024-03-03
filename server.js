@@ -9,7 +9,7 @@ require("dotenv").config();
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: "https://nvk-tic-tac-toe.vercel.app/",
+  cors: "http://localhost:3000",
 });
 
 const allUsers = {};
