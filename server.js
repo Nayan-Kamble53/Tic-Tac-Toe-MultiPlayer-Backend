@@ -1,14 +1,15 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
-const { createServer } = require("http");
+const { http } = require("http");
 const { Server } = require("socket.io");
+const app = express();
 
 app.use(cors());
+require("dotenv").config();
 
-const httpServer = createServer();
+const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
-  cors: "https://cool-crisp-40da90.netlify.app/",
+  cors: "http://localhost:3000",
 });
 
 const allUsers = {};
@@ -87,4 +88,8 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(5000, () => 'Server is listening on port 5000');
+const PORT = process.env.PORT || 5000
+httpServer.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+})
+// httpServer.listen(5000, () => 'Server is listening on port 5000');
